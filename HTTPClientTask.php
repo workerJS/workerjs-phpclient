@@ -17,6 +17,12 @@ class HTTPClientTask extends Task{
         return $this->sendRequest($url, $payload);
     }
 
+    public function sendMessage($payload){
+        $url = TaskConfig::getOption("api_base")."/message";
+
+        return $this->sendRequest($url, $payload);
+    }
+
     public function preProcess(){
         $this->task->webhook = TaskConfig::getOption("webhook");
     }
@@ -40,9 +46,5 @@ class HTTPClientTask extends Task{
         } else {
             return $result;
         }
-    }
-
-    public function sendMessage(){
-        // TODO: Implement sendMessage() method.
     }
 }
