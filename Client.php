@@ -8,8 +8,7 @@
 
 namespace App;
 
-class Client
-{
+class Client{
     private $options;
 
     public function __construct($options){

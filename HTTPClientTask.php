@@ -9,10 +9,8 @@
 namespace App;
 
 
-class HTTPClientTask extends Task
-{
-    public function sendTask()
-    {
+class HTTPClientTask extends Task{
+    public function sendTask(){
         $url = TaskConfig::getOption("api_base")."/task";
         $payload = $this->getTask();
 
@@ -44,8 +42,7 @@ class HTTPClientTask extends Task
         }
     }
 
-    public function sendMessage()
-    {
+    public function sendMessage(){
         // TODO: Implement sendMessage() method.
     }
 }
