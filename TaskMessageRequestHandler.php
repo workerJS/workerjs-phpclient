@@ -29,7 +29,7 @@ class TaskRequestHandler
         $handlerName = $task->getHandlerName();
 
         try {
-            TaskManager::call($handlerName, $task, $params);
+            TaskMessageRouter::call($handlerName, $task, $params);
         } catch(Exception $e){
             //TODO: Log unimplemented handler
         }
