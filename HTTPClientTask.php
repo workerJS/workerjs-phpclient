@@ -9,7 +9,7 @@
 namespace App;
 
 
-class TaskWebhook extends Task
+class HTTPClientTask extends Task
 {
     public function sendTask()
     {
