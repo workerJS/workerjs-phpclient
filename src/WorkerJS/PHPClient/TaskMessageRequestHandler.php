@@ -6,8 +6,7 @@
  * Time: 4:58 AM
  */
 
-namespace App;
-
+namespace WorkerJS\PHPClient;
 
 class TaskRequestHandler{
     private $client;

@@ -6,8 +6,7 @@
  * Time: 4:38 AM
  */
 
-namespace App;
-
+namespace WorkerJS\PHPClient;
 
 abstract class Task
 {

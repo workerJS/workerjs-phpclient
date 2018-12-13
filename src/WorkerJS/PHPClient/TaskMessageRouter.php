@@ -6,8 +6,7 @@
  * Time: 4:37 AM
  */
 
-namespace App;
-
+namespace WorkerJS\PHPClient;
 
 class TaskMessageRouter {
     private static $taskMessageRouter;

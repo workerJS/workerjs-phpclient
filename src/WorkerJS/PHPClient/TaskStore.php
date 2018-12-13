@@ -6,8 +6,7 @@
  * Time: 5:27 AM
  */
 
-namespace App;
-
+namespace WorkerJS\PHPClient;
 
 abstract class TaskStore{
     private $client;

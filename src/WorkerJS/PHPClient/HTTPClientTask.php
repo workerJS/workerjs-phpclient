@@ -6,7 +6,7 @@
  * Time: 5:53 AM
  */
 
-namespace App;
+namespace WorkerJS\PHPClient;
 
 
 class HTTPClientTask extends Task{

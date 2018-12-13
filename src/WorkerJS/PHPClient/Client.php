@@ -6,7 +6,7 @@
  * Time: 4:38 AM
  */
 
-namespace App;
+namespace WorkerJS\PHPClient;
 
 class Client{
     private $options;

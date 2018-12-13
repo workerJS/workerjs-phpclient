@@ -6,10 +6,8 @@
  * Time: 5:51 AM
  */
 
-namespace App;
+namespace WorkerJS\PHPClient;
 
-
-interface TaskMessageHandler
-{
+interface TaskMessageHandler{
     public function handle(Task $task, $params);
 }

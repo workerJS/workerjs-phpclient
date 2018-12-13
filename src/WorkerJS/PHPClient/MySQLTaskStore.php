@@ -6,6 +6,8 @@
  * Time: 4:38 AM
  */
 
+ namespace WorkerJS\PHPClient;
+
  class MySQLTaskStore {
     private $connection;
 
