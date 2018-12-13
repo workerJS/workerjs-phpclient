@@ -29,6 +29,8 @@ class Client{
         
         if($this->options["store"]["type"] == "mysql"){
             $this->taskStore = new MySQLTaskStore($client);
+        } else {
+            throw new Exception("Invalid Store choice. ");
         }
     }
 

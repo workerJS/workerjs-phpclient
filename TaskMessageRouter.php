@@ -48,8 +48,7 @@ class TaskMessageRouter {
 
     private $handlers = [];
 
-    private function __construct()
-    {
+    private function __construct(){
     }
 }
 
