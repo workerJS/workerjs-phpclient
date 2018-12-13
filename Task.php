@@ -12,9 +12,10 @@ namespace App;
 abstract class Task
 {
     private $name;
+    private $client;
     protected $task;
 
-    public function __construct($params)
+    public function __construct($client, $params)
     {
         if($params instanceof string) {
             $name = $params;

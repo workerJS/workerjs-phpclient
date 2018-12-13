@@ -11,20 +11,23 @@ namespace App;
 
 class HTTPClientTask extends Task{
     public function sendTask(){
-        $url = TaskConfig::getOption("api_base")."/task";
+        $url = $this->client->getSetting("api_base")."/task";
         $payload = $this->getTask();
 
-        return $this->sendRequest($url, $payload);
+        $taskResponse = $this->sendRequest($url, $payload);
+
+        $client->getTaskStore()->setTask($taskResponse["taskID"], $task->getTask());
+        return $taskResponse;
     }
 
     public function sendMessage($payload){
-        $url = TaskConfig::getOption("api_base")."/message";
+        $url = $this->client->getSetting("api_base")."/message";
 
         return $this->sendRequest($url, $payload);
     }
 
     public function preProcess(){
-        $this->task->webhook = TaskConfig::getOption("webhook");
+        $this->task->webhook = $this->client->getSetting("webhook");
     }
 
     private function sendRequest($url, $payload){
@@ -44,7 +47,7 @@ class HTTPClientTask extends Task{
         }else if($code !== 200) {
             throw new Exception($result);
         } else {
-            return $result;
+            return json_decode($result, true);
         }
     }
 }

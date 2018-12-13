@@ -9,8 +9,13 @@
 namespace App;
 
 
-class TaskRequestHandler
-{
+class TaskRequestHandler{
+    private $client;
+
+    public function __construct($client){
+        $this->client = $client;
+    }
+
     public static function handleRequest(string $body){
         $body = json_decode($body, true);
 
@@ -18,18 +23,17 @@ class TaskRequestHandler
 
         $taskID = $body->taskID;
 
-        $taskStoreClass = TaskConfig::getOption("taskStoreClass");
+        $taskStoreClass = $this->client->getSetting("taskStoreClass");
         $taskStore = new $taskStoreClass();
 
         $task = $taskStore->getTask($taskID);
 
-        $taskClass = TaskConfig::getOption("taskClass");
-        $task = new $taskClass($task);
+        $task = $this->client->newTask($task);
 
         $handlerName = $task->getHandlerName();
 
         try {
-            TaskMessageRouter::call($handlerName, $task, $params);
+            $this->client->getTaskMessageRouter()->call($handlerName, $task, $params);
         } catch(Exception $e){
             //TODO: Log unimplemented handler
         }

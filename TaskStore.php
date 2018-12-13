@@ -10,7 +10,11 @@ namespace App;
 
 
 abstract class TaskStore{
-    abstract public function __construct();
+    private $client;
+
+    public function __construct($client){
+        $this->client = $client;
+    }
 
     abstract public function setTask($taskID, Task $task);
     abstract public function getTask($taskID);
