@@ -1,0 +1,19 @@
+{
+    "name": "workerjs/workerjs-phpclient",
+    "description": "PHP implementation of client (used with workerjs-httpclient)",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nemanjan00",
+            "email": "nemanjan00@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WorkerJS\\": "src/WorkerJS/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
