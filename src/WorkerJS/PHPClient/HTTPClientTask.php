@@ -23,6 +23,8 @@ class HTTPClientTask extends Task{
     public function sendMessage($payload){
         $url = $this->client->getSetting("api_base")."/message";
 
+        $payload->taskID = $this->task->taskID;
+
         return $this->sendRequest($url, $payload);
     }
 
