@@ -8,7 +8,7 @@
 
 namespace WorkerJS\PHPClient;
 
-class TaskRequestHandler{
+class TaskMessageRequestHandler{
     private $client;
 
     public function __construct(Client $client){

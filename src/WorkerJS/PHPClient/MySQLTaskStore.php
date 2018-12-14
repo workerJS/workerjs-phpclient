@@ -30,6 +30,6 @@
     }
 
     public function setTask($taskID, $task){
-        $result = mysqli_query($this->connection, "INSERT INTO `tasks` (`taskID`, `task`) VALUES (".intval($taskID).", '".mysqli_real_escape_string($this->link, json_encode($task->getTask()))."')");
+        mysqli_query($this->connection, "INSERT INTO `tasks` (`taskID`, `task`) VALUES (".intval($taskID).", '".mysqli_real_escape_string($this->link, json_encode($task->getTask()))."')");
     }
  }

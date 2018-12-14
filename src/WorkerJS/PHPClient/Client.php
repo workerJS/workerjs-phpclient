@@ -25,27 +25,27 @@ class Client{
     public function __construct($options){
         $this->options = $options;
 
-        $this->messageRouter = TaskMessageRouter::getTaskMessageRouter();
+        $this->taskMessageRouter = TaskMessageRouter::getTaskMessageRouter();
 
         if($this->options["store"]["type"] == "mysql"){
             $this->taskStore = new MySQLTaskStore($this);
         } else {
-            throw new Exception("Invalid Store choice. ");
+            throw new \Exception("Invalid Store choice. ");
         }
     }
 
     public function getSetting($name){
         if(isset($this->options[$name])){
-            return $this->option[$name];
+            return $this->options[$name];
         } else if(isset($this->defaultOptions[$name])) {
             return $this->defaultOptions[$name];
         } else {
-            throw new Exception("Option $name is not defined. ");
+            throw new \Exception("Option $name is not defined. ");
         }
     }
 
     public function getTaskMessageRouter(){
-        return $this->messageRouter;
+        return $this->taskMessageRouter;
     }
 
     public function getTaskStore(){
@@ -53,10 +53,10 @@ class Client{
     }
 
     public function newTask($name){
-        if($this->getSetting("api") == "http"){
+        if($this->getSetting("api") == "httpclient"){
             return new HTTPClientTask($this, $name);
         } else {
-            throw new Exception("Invalid API choice. ");
+            throw new \Exception("Invalid API choice. ");
         }
     }
 }
