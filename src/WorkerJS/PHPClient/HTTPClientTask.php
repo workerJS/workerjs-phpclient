@@ -10,13 +10,24 @@ namespace WorkerJS\PHPClient;
 
 
 class HTTPClientTask extends Task{
+
+    private $client;
+    private $name;
+
+    public function __construct($client, $name)
+    {
+        $this->client = $client;
+        $this->name = $name;
+    }
+
+
     public function sendTask(){
         $url = $this->client->getSetting("api_base")."/task";
         $payload = $this->getTask();
 
         $taskResponse = $this->sendRequest($url, $payload);
 
-        $client->getTaskStore()->setTask($taskResponse["taskID"], $task->getTask());
+        $this->client->getTaskStore()->setTask($taskResponse["taskID"], $this->getTask());
         return $taskResponse;
     }
 

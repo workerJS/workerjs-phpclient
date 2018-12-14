@@ -41,7 +41,7 @@ abstract class Task
 
     abstract public function sendTask();
 
-    abstract public function sendMessage();
+    abstract public function sendMessage($payload);
 
     private function preProcessParams(){
         //Optional override

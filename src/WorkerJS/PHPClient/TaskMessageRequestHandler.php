@@ -11,19 +11,18 @@ namespace WorkerJS\PHPClient;
 class TaskRequestHandler{
     private $client;
 
-    public function __construct($client){
+    public function __construct(Client $client){
         $this->client = $client;
     }
 
-    public static function handleRequest(string $body){
+    public function handleRequest(string $body){
         $body = json_decode($body, true);
 
         //TODO: Check protocol
 
         $taskID = $body->taskID;
 
-        $taskStoreClass = $this->client->getSetting("taskStoreClass");
-        $taskStore = new $taskStoreClass();
+        $taskStore = $this->client->getTaskStore();
 
         $task = $taskStore->getTask($taskID);
 
@@ -32,7 +31,7 @@ class TaskRequestHandler{
         $handlerName = $task->getHandlerName();
 
         try {
-            $this->client->getTaskMessageRouter()->call($handlerName, $task, $params);
+            $this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
         } catch(Exception $e){
             //TODO: Log unimplemented handler
         }

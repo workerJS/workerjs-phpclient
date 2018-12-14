@@ -25,10 +25,10 @@ class Client{
     public function __construct($options){
         $this->options = $options;
 
-        $this->messageRouter = new TaskMessageRouter();
-        
+        $this->messageRouter = TaskMessageRouter::getTaskMessageRouter();
+
         if($this->options["store"]["type"] == "mysql"){
-            $this->taskStore = new MySQLTaskStore($client);
+            $this->taskStore = new MySQLTaskStore($this);
         } else {
             throw new Exception("Invalid Store choice. ");
         }
