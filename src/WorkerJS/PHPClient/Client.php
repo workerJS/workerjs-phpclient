@@ -29,6 +29,8 @@ class Client{
 
         if($this->options["store"]["type"] == "mysql"){
             $this->taskStore = new MySQLTaskStore($this);
+        } else if($this->options["store"]["type"] == "postgres"){
+            $this->taskStore = new PostgresTaskStore($this);
         } else {
             throw new \Exception("Invalid Store choice. ");
         }
