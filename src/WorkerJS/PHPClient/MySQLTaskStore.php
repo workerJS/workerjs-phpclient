@@ -16,7 +16,7 @@
 
         $connection = parse_url($this->client->getSetting("store")["uri"]);
 
-        $this->connection = mysqli_connect($connection["host"], $connection["user"], $connection["password"], trim($connection["path"], "/"));
+        $this->connection = mysqli_connect($connection["host"], $connection["user"], $connection["pass"], trim($connection["path"], "/"));
     }
 
     public function getTask($taskID){
