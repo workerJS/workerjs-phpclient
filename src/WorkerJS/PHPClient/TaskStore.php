@@ -9,7 +9,7 @@
 namespace WorkerJS\PHPClient;
 
 abstract class TaskStore{
-    private $client;
+    protected $client;
 
     public function __construct($client){
         $this->client = $client;
