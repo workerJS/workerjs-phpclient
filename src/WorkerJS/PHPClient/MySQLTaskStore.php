@@ -8,7 +8,7 @@
 
  namespace WorkerJS\PHPClient;
 
- class MySQLTaskStore {
+ class MySQLTaskStore extends TaskStore {
     private $connection;
 
     public function __construct($client){
