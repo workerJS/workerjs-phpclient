@@ -12,7 +12,7 @@
     private $connection;
 
     public function __construct($client){
-        super($client);
+        parent::__construct($client);
 
         $connection = parse_url($this->client->getSetting("store")["uri"]);
 
