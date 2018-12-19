@@ -15,7 +15,7 @@
         parent::__construct($client);
 
         $connection = parse_url($this->client->getSetting("store")["uri"]);
-		$params = "host=".$connection["host"]." dbname=".trim($connection["path"], "/")." user=".$connection["user"]." password=".$connection["pass"]:
+		$params = "host=".$connection["host"]." dbname=".trim($connection["path"], "/")." user=".@$connection["user"]." password=".@$connection["pass"]:
 
         $this->connection = pg_connect($this->client->getSetting("store")["uri"]);
     }
