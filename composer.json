@@ -1,6 +1,6 @@
 {
     "name": "workerjs/workerjs-phpclient",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "PHP implementation of client (used with workerjs-httpclient)",
     "type": "library",
     "license": "MIT",
