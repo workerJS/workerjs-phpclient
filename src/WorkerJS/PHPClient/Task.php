@@ -19,7 +19,7 @@ abstract class Task
             $name = $params;
             $this->task = [
                 "name" => null,
-                "params" => null
+                "task" => null
             ];
 
             $this->task["name"] = $name;
@@ -34,7 +34,7 @@ abstract class Task
     }
 
     public function setParams($body){
-        $this->task["params"] = $body;
+        $this->task["task"] = $body;
         $this->preProcessParams();
     }
 
