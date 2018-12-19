@@ -23,7 +23,7 @@
         $result = mysqli_query($this->connection, "SELECT `task` FROM `tasks` WHERE `taskID` = ".intval($taskID));
 
         if(mysqli_num_rows($result) === 0){
-            throw new Exception("Task $taskID not found.");
+            throw new \Exception("Task $taskID not found.");
         } else {
             return mysqli_fetch_assoc($result);
         }

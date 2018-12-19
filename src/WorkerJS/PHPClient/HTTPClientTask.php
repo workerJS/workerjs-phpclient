@@ -56,9 +56,9 @@ class HTTPClientTask extends Task{
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if($error = curl_error($ch)){
-            throw new Exception($error);
+            throw new \Exception($error);
         }else if($code !== 200) {
-            throw new Exception($result);
+            throw new \Exception($result);
         } else {
             return json_decode($result, true);
         }

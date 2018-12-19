@@ -41,7 +41,7 @@ class TaskMessageRouter {
         if(isset($taskMessageRouter->handlers[$name])) {
             return $taskMessageRouter->handlers[$name];
         } else {
-            throw Exception("Handler for $name is not registered. ");
+            throw \Exception("Handler for $name is not registered. ");
         }
     }
 

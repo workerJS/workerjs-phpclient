@@ -16,7 +16,7 @@ class TaskMessageRequestHandler{
     }
 
     public function handleRequest(string $body){
-        $body = json_decode($body, true);
+        $body = json_decode($body);
 
         //TODO: Check protocol
 
