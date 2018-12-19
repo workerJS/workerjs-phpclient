@@ -10,13 +10,12 @@ namespace WorkerJS\PHPClient;
 
 abstract class Task
 {
-    private $name;
     private $client;
     protected $task;
 
     public function __construct($client, $params)
     {
-        if($params instanceof string) {
+        if( is_string($params) ) {
             $name = $params;
             $this->task = [
                 "name" => null,
@@ -48,6 +47,6 @@ abstract class Task
     }
 
     public function getHandlerName() {
-        return $this->name;
+        return $this->task["name"];
     }
 }

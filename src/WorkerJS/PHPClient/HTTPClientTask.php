@@ -16,6 +16,7 @@ class HTTPClientTask extends Task{
 
     public function __construct($client, $name)
     {
+        parent::__construct($client, $name);
         $this->client = $client;
         $this->name = $name;
     }
@@ -27,16 +28,18 @@ class HTTPClientTask extends Task{
 
         $taskResponse = $this->sendRequest($url, $payload);
 
-        $this->client->getTaskStore()->setTask($taskResponse["taskID"], $this->getTask());
+        $this->client->getTaskStore()->setTask($taskResponse["taskID"], $this);
         return $taskResponse;
     }
 
     public function sendMessage($payload){
         $url = $this->client->getSetting("api_base")."/message";
+        $request = [
+            "taskID" =>  $this->task["taskID"],
+            "message" => $payload,
+        ];
 
-        $payload->taskID = $this->task->taskID;
-
-        return $this->sendRequest($url, $payload);
+        return $this->sendRequest($url, $request);
     }
 
     public function preProcess(){
@@ -49,7 +52,7 @@ class HTTPClientTask extends Task{
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);

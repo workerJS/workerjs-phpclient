@@ -25,7 +25,8 @@
         if(mysqli_num_rows($result) === 0){
             throw new \Exception("Task $taskID not found.");
         } else {
-            return mysqli_fetch_assoc($result);
+            $task = mysqli_fetch_assoc($result)["task"];
+            return json_decode($task);
         }
     }
 

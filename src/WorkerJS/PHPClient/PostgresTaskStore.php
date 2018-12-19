@@ -21,16 +21,18 @@
     }
 
     public function getTask($taskID){
-        $result = pg_query($this->connection, "SELECT task FROM tasks WHERE \"taskID\" = ".intval($taskID));
+        $result = pg_query($this->connection, "SELECT task FROM tasks WHERE \"taskID\" = '".pg_escape_string($this->connection, $taskID)."'");
 
         if(pg_num_rows($result) === 0){
             throw new \Exception("Task $taskID not found.");
         } else {
-            return pg_fetch_assoc($result);
+            $task = pg_fetch_assoc($result)["task"];
+
+            return json_decode($task, true);
         }
     }
 
     public function setTask($taskID, Task $task){
-        pg_query($this->connection, "INSERT INTO tasks (\"taskID\", task) VALUES (".intval($taskID).", '".pg_escape_string($this->connection, json_encode($task->getTask()))."')");
+        pg_query($this->connection, "INSERT INTO tasks (\"taskID\", task) VALUES ('".pg_escape_string($this->connection, $taskID)."', '".pg_escape_string($this->connection, json_encode($task->getTask()))."')");
     }
  }

@@ -18,11 +18,12 @@ require_once("./src/WorkerJS/PHPClient/TaskStore.php");
 use \WorkerJS\PHPClient;
 
 $client = new PHPClient\Client([]);
+$taskMessageRequestHandler = new PHPClient\TaskMessageRequestHandler($client);
 
 // Message receiver
 
 $router->get("/webhook", function($request, $response){
-	$taskMessageRequestHandler = new PHPClient\TaskMessageRequestHandler($client);
+    global $taskMessageRequestHandler;
 
     $taskMessageRequestHandler->handleRequest($request->body);
 });
@@ -53,4 +54,3 @@ $task->setParams([
 ]);
 
 $task->sendTask();
-

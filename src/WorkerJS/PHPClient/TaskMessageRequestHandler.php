@@ -17,7 +17,6 @@ class TaskMessageRequestHandler{
 
     public function handleRequest(string $body){
         $body = json_decode($body);
-
         //TODO: Check protocol
 
         $taskID = $body->taskID;
@@ -25,10 +24,11 @@ class TaskMessageRequestHandler{
         $taskStore = $this->client->getTaskStore();
 
         $task = $taskStore->getTask($taskID);
+        $task["taskID"] = $taskID;
 
         $task = $this->client->newTask($task);
 
-        $handlerName = $task->getHandlerName();
+        $handlerName = $body->name;
 
         try {
             $this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
