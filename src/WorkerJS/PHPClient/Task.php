@@ -38,7 +38,7 @@ abstract class Task
 		if(isset($this->task["taskID"])){
 			return $this->task["taskID"];
 		} else {
-			throw \Exception("TaskID is not defined yet, you need to send task first. ");
+			throw new \Exception("TaskID is not defined yet, you need to send task first. ");
 		}
     }
 
