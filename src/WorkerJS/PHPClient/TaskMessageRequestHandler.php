@@ -21,12 +21,7 @@ class TaskMessageRequestHandler{
 
         $taskID = $body->taskID;
 
-        $taskStore = $this->client->getTaskStore();
-
-        $task = $taskStore->getTask($taskID);
-        $task["taskID"] = $taskID;
-
-        $task = $this->client->newTask($task);
+		$task = $this->client->getTaskByID($taskID);
 
         $handlerName = $body->name;
 

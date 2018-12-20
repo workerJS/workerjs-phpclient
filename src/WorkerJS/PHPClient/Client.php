@@ -46,6 +46,17 @@ class Client{
         }
     }
 
+    public function getTaskByID($taskID){
+        $taskStore = $this->getTaskStore();
+
+        $task = $taskStore->getTask($taskID);
+        $task["taskID"] = $taskID;
+
+        $task = $this->newTask($task);
+
+		return $task;
+    }
+
     public function getTaskMessageRouter(){
         return $this->taskMessageRouter;
     }

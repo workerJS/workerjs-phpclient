@@ -33,6 +33,15 @@ abstract class Task
         return $this->task;
     }
 
+    public function getTaskID()
+    {
+		if(isset($this->task["taskID"])){
+			return $this->task["taskID"];
+		} else {
+			throw \Exception("TaskID is not defined yet, you need to send task first. ");
+		}
+    }
+
     public function setParams($body){
         $this->task["task"] = $body;
         $this->preProcessParams();
