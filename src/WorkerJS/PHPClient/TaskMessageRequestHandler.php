@@ -23,7 +23,7 @@ class TaskMessageRequestHandler{
 
 		$task = $this->client->getTaskByID($taskID);
 
-        $handlerName = $body->name;
+        $handlerName = $body->message->type;
 
         try {
             $this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
