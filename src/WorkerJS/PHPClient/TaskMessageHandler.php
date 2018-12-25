@@ -8,6 +8,15 @@
 
 namespace WorkerJS\PHPClient;
 
+use WorkerJS\PHPClient\exceptions\UndefinedSettingsException;
+
 interface TaskMessageHandler{
+
+    /**
+     * @param Task $task
+     * @param $params
+     * @return mixed
+     * @throws UndefinedSettingsException
+     */
     public function handle(Task $task, $params);
 }

@@ -8,6 +8,8 @@
 
 namespace WorkerJS\PHPClient;
 
+use WorkerJS\PHPClient\exceptions\TaskNotSetException;
+
 abstract class Task
 {
     private $client;
@@ -33,12 +35,16 @@ abstract class Task
         return $this->task;
     }
 
+    /**
+     * @return mixed
+     * @throws TaskNotSetException
+     */
     public function getTaskID()
     {
 		if(isset($this->task["taskID"])){
 			return $this->task["taskID"];
 		} else {
-			throw new \Exception("TaskID is not defined yet, you need to send task first. ");
+			throw new TaskNotSetException("TaskID is not defined yet, you need to send task first. ");
 		}
     }
 

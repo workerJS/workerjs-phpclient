@@ -8,6 +8,8 @@
 
  namespace WorkerJS\PHPClient;
 
+ use WorkerJS\PHPClient\exceptions\TaskNotFoundException;
+
  class PostgresTaskStore extends TaskStore {
     private $connection;
 
@@ -24,7 +26,7 @@
         $result = pg_query($this->connection, "SELECT task FROM tasks WHERE \"taskID\" = '".pg_escape_string($this->connection, $taskID)."'");
 
         if(pg_num_rows($result) === 0){
-            throw new \Exception("Task $taskID not found.");
+            throw new TaskNotFoundException("Task $taskID not found.");
         } else {
             $task = pg_fetch_assoc($result)["task"];
 

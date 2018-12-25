@@ -8,11 +8,14 @@
 
 namespace WorkerJS\PHPClient;
 
+use WorkerJS\PHPClient\exceptions\RequestException;
+use WorkerJS\PHPClient\exceptions\ResponseException;
 
 class HTTPClientTask extends Task{
 
     private $client;
     private $name;
+
 
     public function __construct($client, $name)
     {
@@ -21,7 +24,11 @@ class HTTPClientTask extends Task{
         $this->name = $name;
     }
 
-
+    /**
+     * @return mixed
+     * @throws RequestException
+     * @throws ResponseException
+     */
     public function sendTask(){
         $url = $this->client->getSetting("api_base")."/task";
         $payload = $this->getTask();
@@ -32,6 +39,12 @@ class HTTPClientTask extends Task{
         return $taskResponse;
     }
 
+    /**
+     * @param $payload
+     * @return mixed
+     * @throws RequestException
+     * @throws ResponseException
+     */
     public function sendMessage($payload){
         $url = $this->client->getSetting("api_base")."/message";
         $request = [
@@ -41,6 +54,7 @@ class HTTPClientTask extends Task{
 
         return $this->sendRequest($url, $request);
     }
+
 
     public function preProcess(){
         $this->task->webhook = $this->client->getSetting("webhook");
@@ -59,9 +73,9 @@ class HTTPClientTask extends Task{
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if($error = curl_error($ch)){
-            throw new \Exception($error);
+            throw new RequestException($error);
         }else if($code !== 200) {
-            throw new \Exception($result);
+            throw new ResponseException($result);
         } else {
             return json_decode($result, true);
         }

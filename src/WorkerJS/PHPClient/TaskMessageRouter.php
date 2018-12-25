@@ -10,7 +10,6 @@ namespace WorkerJS\PHPClient;
 
 class TaskMessageRouter {
     private static $taskMessageRouter;
-    private static $webHookHandler;
 
     public static function getTaskMessageRouter(){
         if(!self::$taskMessageRouter) {
