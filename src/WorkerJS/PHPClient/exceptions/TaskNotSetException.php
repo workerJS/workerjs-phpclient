@@ -9,7 +9,5 @@
 namespace WorkerJS\PHPClient\exceptions;
 
 
-class TaskNotSetException extends \Exception
-{
+class TaskNotSetException extends \Exception {}
 
-}

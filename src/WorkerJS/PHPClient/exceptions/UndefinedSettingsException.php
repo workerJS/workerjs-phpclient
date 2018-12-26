@@ -8,10 +8,5 @@
 
 namespace WorkerJS\PHPClient\exceptions;
 
+class UndefinedSettingsException extends \Exception {}
 
-class UndefinedSettingsException extends \Exception
-{
-
-
-
-}

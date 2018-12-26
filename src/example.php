@@ -22,21 +22,20 @@ $taskMessageRequestHandler = new PHPClient\TaskMessageRequestHandler($client);
 
 // Message receiver
 
-$router->get("/webhook", function($request, $response){
-    global $taskMessageRequestHandler;
+$router->get("/webhook", function($request, $response) {
+	global $taskMessageRequestHandler;
 
-    $taskMessageRequestHandler->handleRequest($request->body);
+	$taskMessageRequestHandler->handleRequest($request->body);
 });
 
 // Message handler
 
 class DeliveryReport implements PHPClient\TaskMessageHandler {
-    public function handle(\WorkerJS\PHPClient\Task $task, $params)
-    {
-        $task->sendMessage(["message" => "ok"]);
+	public function handle(\WorkerJS\PHPClient\Task $task, $params) {
+		$task->sendMessage(["message" => "ok"]);
 
-        // TODO: Implement handle() method.
-    }
+		// TODO: Implement handle() method.
+	}
 }
 
 $handler = new DeliveryReport();
@@ -48,9 +47,10 @@ $client->getTaskMessageRouter()->subscribe("delivery-report", $handler);
 $task = $client->newTask("sendSMS");
 
 $task->setParams([
-    "from" => "+3874387483",
-    "to" => "+423423423478",
-    "body" => "Fdfsfd fwdsfwergf dfgdfg rgergerg. "
+	"from" => "+3874387483",
+	"to" => "+423423423478",
+	"body" => "Fdfsfd fwdsfwergf dfgdfg rgergerg. "
 ]);
 
 $task->sendTask();
+

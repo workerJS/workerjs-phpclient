@@ -8,32 +8,32 @@
 
 namespace WorkerJS\PHPClient;
 
-class TaskMessageRequestHandler{
-    private $client;
+class TaskMessageRequestHandler {
+	private $client;
 
-    public function __construct(Client $client){
-        $this->client = $client;
-    }
+	public function __construct(Client $client) {
+		$this->client = $client;
+	}
 
-    /**
-     * @param string $body
-     * @throws exceptions\InvalidApiException
-     * @throws exceptions\UndefinedSettingsException
-     */
-    public function handleRequest(string $body){
-        $body = json_decode($body);
-        //TODO: Check protocol
+	/**
+	 * @param string $body
+	 * @throws exceptions\InvalidApiException
+	 * @throws exceptions\UndefinedSettingsException
+	 */
+	public function handleRequest(string $body) {
+		$body = json_decode($body);
+		//TODO: Check protocol
 
-        $taskID = $body->taskID;
+		$taskID = $body->taskID;
 
 		$task = $this->client->getTaskByID($taskID);
 
-        $handlerName = $body->message->type;
+		$handlerName = $body->message->type;
 
-        try {
-            $this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
-        } catch(Exception $e){
-            //TODO: Log unimplemented handler
-        }
-    }
+		try {
+			$this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
+		} catch(Exception $e) {
+			//TODO: Log unimplemented handler
+		}
+	}
 }

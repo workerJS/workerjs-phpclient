@@ -9,7 +9,5 @@
 namespace WorkerJS\PHPClient\exceptions;
 
 
-class TaskNotFoundException extends \Exception
-{
+class TaskNotFoundException extends \Exception{}
 
-}

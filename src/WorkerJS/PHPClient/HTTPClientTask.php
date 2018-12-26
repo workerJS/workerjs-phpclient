@@ -13,72 +13,72 @@ use WorkerJS\PHPClient\exceptions\ResponseException;
 
 class HTTPClientTask extends Task{
 
-    private $client;
-    private $name;
+	private $client;
+	private $name;
 
 
-    public function __construct($client, $name)
-    {
-        parent::__construct($client, $name);
-        $this->client = $client;
-        $this->name = $name;
-    }
+	public function __construct($client, $name) {
+		parent::__construct($client, $name);
+		$this->client = $client;
+		$this->name = $name;
+	}
 
-    /**
-     * @return mixed
-     * @throws RequestException
-     * @throws ResponseException
-     */
-    public function sendTask(){
-        $url = $this->client->getSetting("api_base")."/task";
-        $payload = $this->getTask();
+	/**
+	 * @return mixed
+	 * @throws RequestException
+	 * @throws ResponseException
+	 */
 
-        $taskResponse = $this->sendRequest($url, $payload);
+	public function sendTask() {
+		$url = $this->client->getSetting("api_base")."/task";
+		$payload = $this->getTask();
 
-        $this->client->getTaskStore()->setTask($taskResponse["taskID"], $this);
-        return $taskResponse;
-    }
+		$taskResponse = $this->sendRequest($url, $payload);
 
-    /**
-     * @param $payload
-     * @return mixed
-     * @throws RequestException
-     * @throws ResponseException
-     */
-    public function sendMessage($payload){
-        $url = $this->client->getSetting("api_base")."/message";
-        $request = [
-            "taskID" =>  $this->task["taskID"],
-            "message" => $payload,
-        ];
+		$this->client->getTaskStore()->setTask($taskResponse["taskID"], $this);
+		return $taskResponse;
+	}
 
-        return $this->sendRequest($url, $request);
-    }
+	/**
+	 * @param $payload
+	 * @return mixed
+	 * @throws RequestException
+	 * @throws ResponseException
+	 */
 
+	public function sendMessage($payload) {
+		$url = $this->client->getSetting("api_base")."/message";
+		$request = [
+			"taskID" =>  $this->task["taskID"],
+			"message" => $payload,
+		];
 
-    public function preProcess(){
-        $this->task->webhook = $this->client->getSetting("webhook");
-    }
+		return $this->sendRequest($url, $request);
+	}
 
-    private function sendRequest($url, $payload){
-        $ch = curl_init();
+	public function preProcess() {
+		$this->task->webhook = $this->client->getSetting("webhook");
+	}
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	private function sendRequest($url, $payload) {
+		$ch = curl_init();
 
-        $result = curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        if($error = curl_error($ch)){
-            throw new RequestException($error);
-        }else if($code !== 200) {
-            throw new ResponseException($result);
-        } else {
-            return json_decode($result, true);
-        }
-    }
+		$result = curl_exec($ch);
+		$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		if($error = curl_error($ch)){
+			throw new RequestException($error);
+		}else if($code !== 200) {
+			throw new ResponseException($result);
+		} else {
+			return json_decode($result, true);
+		}
+	}
 }
 

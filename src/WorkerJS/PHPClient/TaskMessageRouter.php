@@ -9,44 +9,42 @@
 namespace WorkerJS\PHPClient;
 
 class TaskMessageRouter {
-    private static $taskMessageRouter;
+	private static $taskMessageRouter;
 
-    public static function getTaskMessageRouter(){
-        if(!self::$taskMessageRouter) {
-            self::$taskMessageRouter = new TaskMessageRouter();
+	public static function getTaskMessageRouter() {
+		if(!self::$taskMessageRouter) {
+			self::$taskMessageRouter = new TaskMessageRouter();
 
-            return self::$taskMessageRouter;
-        } else {
-            return self::$taskMessageRouter;
-        }
-    }
+			return self::$taskMessageRouter;
+		} else {
+			return self::$taskMessageRouter;
+		}
+	}
 
-    public static function subscribe($name, TaskMessageHandler $handler){
-        $taskMessageRouter = self::getTaskMessageRouter();
-        $taskMessageRouter->handlers[$name] = $handler;
-    }
+	public static function subscribe($name, TaskMessageHandler $handler) {
+		$taskMessageRouter = self::getTaskMessageRouter();
+		$taskMessageRouter->handlers[$name] = $handler;
+	}
 
-    public static function call($name, $task, $params){
-        $taskMessageRouter = self::getTaskMessageRouter();
+	public static function call($name, $task, $params) {
+		$taskMessageRouter = self::getTaskMessageRouter();
 
-        $handler = $taskMessageRouter->getHandlerByName($name);
-        $handler->handle($task, $params);
-    }
+		$handler = $taskMessageRouter->getHandlerByName($name);
+		$handler->handle($task, $params);
+	}
 
-    private static function getHandlerByName($name)
-    {
-        $taskMessageRouter = self::getTaskMessageRouter();
+	private static function getHandlerByName($name)	{
+		$taskMessageRouter = self::getTaskMessageRouter();
 
-        if(isset($taskMessageRouter->handlers[$name])) {
-            return $taskMessageRouter->handlers[$name];
-        } else {
-            throw new \Exception("Handler for $name is not registered. ");
-        }
-    }
+		if(isset($taskMessageRouter->handlers[$name])) {
+			return $taskMessageRouter->handlers[$name];
+		} else {
+			throw new \Exception("Handler for $name is not registered. ");
+		}
+	}
 
-    private $handlers = [];
+	private $handlers = [];
 
-    private function __construct(){
-    }
+	private function __construct() {}
 }
 

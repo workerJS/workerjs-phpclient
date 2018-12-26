@@ -9,7 +9,5 @@
 namespace WorkerJS\PHPClient\exceptions;
 
 
-class StoreNotImplementedException extends \Exception
-{
+class StoreNotImplementedException extends \Exception {}
 
-}

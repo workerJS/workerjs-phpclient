@@ -10,20 +10,20 @@ namespace WorkerJS\PHPClient;
 
 use WorkerJS\PHPClient\exceptions\TaskNotFoundException;
 
-abstract class TaskStore{
-    protected $client;
+abstract class TaskStore {
+	protected $client;
 
-    public function __construct($client){
-        $this->client = $client;
-    }
+	public function __construct($client) {
+		$this->client = $client;
+	}
 
-    abstract public function setTask($taskID, Task $task);
+	abstract public function setTask($taskID, Task $task);
 
-    /**
-     * @param $taskID
-     * @return mixed
-     * @throws TaskNotFoundException
-     */
-    abstract public function getTask($taskID);
+	/**
+	 * @param $taskID
+	 * @return mixed
+	 * @throws TaskNotFoundException
+	 */
+	abstract public function getTask($taskID);
 }
 
