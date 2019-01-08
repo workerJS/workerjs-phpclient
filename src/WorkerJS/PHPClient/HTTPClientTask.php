@@ -36,7 +36,7 @@ class HTTPClientTask extends Task{
 		$taskResponse = $this->sendRequest($url, $payload);
 
 		$this->client->getTaskStore()->setTask($taskResponse["taskID"], $this);
-		return $taskResponse;
+		return $taskResponse["taskID"];
 	}
 
 	/**
