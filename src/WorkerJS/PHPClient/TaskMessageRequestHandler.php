@@ -8,6 +8,8 @@
 
 namespace WorkerJS\PHPClient;
 
+use WorkerJS\PHPClient\exceptions\InvalidRequestException;
+
 class TaskMessageRequestHandler {
 	private $client;
 
@@ -23,6 +25,10 @@ class TaskMessageRequestHandler {
 	public function handleRequest(string $body) {
 		$body = json_decode($body);
 		//TODO: Check protocol
+
+		if ($body === null && json_last_error() !== JSON_ERROR_NONE) {
+			throw new InvalidRequestException("Invalid request");
+		}
 
 		$taskID = $body->taskID;
 
