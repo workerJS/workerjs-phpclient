@@ -30,11 +30,11 @@ class TaskMessageRequestHandler {
 			throw new InvalidRequestException("Invalid request");
 		}
 
-		$taskID = $body->taskID;
+		$taskID = $body["taskID"];
 
 		$task = $this->client->getTaskByID($taskID);
 
-		$handlerName = $body->message->type;
+		$handlerName = $body["message"]["type"];
 
 		try {
 			$this->client->getTaskMessageRouter()->call($handlerName, $task, $body);
