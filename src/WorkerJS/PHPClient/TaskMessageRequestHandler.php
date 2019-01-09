@@ -23,7 +23,7 @@ class TaskMessageRequestHandler {
 	 * @throws exceptions\UndefinedSettingsException
 	 */
 	public function handleRequest(string $body) {
-		$body = json_decode($body);
+		$body = json_decode($body, true);
 		//TODO: Check protocol
 
 		if ($body === null && json_last_error() !== JSON_ERROR_NONE) {

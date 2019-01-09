@@ -29,7 +29,7 @@
 			throw new TaskNotFoundException("Task $taskID not found.");
 		} else {
 			$task = mysqli_fetch_assoc($result)["task"];
-			return json_decode($task);
+			return json_decode($task, true);
 		}
 	}
 
