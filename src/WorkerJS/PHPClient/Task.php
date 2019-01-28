@@ -20,7 +20,6 @@ abstract class Task {
 			$this->task = [
 				"name" => null,
 				"task" => null,
-                "task-webhook" => null,
 			];
 
 			$this->task["name"] = $name;
