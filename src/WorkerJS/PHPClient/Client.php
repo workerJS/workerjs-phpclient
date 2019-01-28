@@ -61,13 +61,13 @@ class Client{
 		}
 	}
 
-	/**
-	 * @param $taskID
-	 * @return mixed|HTTPClientTask
-	 * @throws InvalidApiException
-	 * @throws UndefinedSettingsException
-	 */
-
+    /**
+     * @param $taskID
+     * @return mixed|HTTPClientTask
+     * @throws InvalidApiException
+     * @throws UndefinedSettingsException
+     * @throws exceptions\TaskNotFoundException
+     */
 	public function getTaskByID($taskID) {
 		$taskStore = $this->getTaskStore();
 

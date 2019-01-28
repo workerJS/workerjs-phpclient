@@ -33,6 +33,14 @@ class HTTPClientTask extends Task{
 		$url = $this->client->getSetting("api_base")."/task";
 		$payload = $this->getTask();
 
+		$webhook = $this->client->getSettings("task-webhook");
+
+		if ($webhook === null) {
+		    throw new RequestException("You need to set webhook url.");
+        }
+
+		$payload->webhook = $webhook;
+
 		$taskResponse = $this->sendRequest($url, $payload);
 
 		$this->client->getTaskStore()->setTask($taskResponse["taskID"], $this);
