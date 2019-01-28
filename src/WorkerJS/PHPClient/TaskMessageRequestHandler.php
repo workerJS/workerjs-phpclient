@@ -17,11 +17,13 @@ class TaskMessageRequestHandler {
 		$this->client = $client;
 	}
 
-	/**
-	 * @param string $body
-	 * @throws exceptions\InvalidApiException
-	 * @throws exceptions\UndefinedSettingsException
-	 */
+    /**
+     * @param string $body
+     * @throws InvalidRequestException
+     * @throws exceptions\InvalidApiException
+     * @throws exceptions\TaskNotFoundException
+     * @throws exceptions\UndefinedSettingsException
+     */
 	public function handleRequest(string $body) {
 		$body = json_decode($body, true);
 		//TODO: Check protocol
