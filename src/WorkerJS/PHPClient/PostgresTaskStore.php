@@ -37,5 +37,13 @@
 	public function setTask($taskID, Task $task) {
 		pg_query($this->connection, "INSERT INTO tasks (\"taskID\", task) VALUES ('".pg_escape_string($this->connection, $taskID)."', '".pg_escape_string($this->connection, json_encode($task->getTask()))."')");
 	}
+
+	public function lock() {
+        pg_query($this->connection,"BEGIN WORK; LOCK TABLE tasks IN ACCESS EXCLUSIVE MODE;");
+    }
+
+    public function unlock() {
+        pg_query($this->connection,"COMMIT WORK;");
+    }
  }
 

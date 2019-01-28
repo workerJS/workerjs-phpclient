@@ -16,5 +16,8 @@
         }
     },
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "ext-pgsql": "*",
+        "ext-json": "*"
+    }
 }

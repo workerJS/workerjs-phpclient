@@ -17,6 +17,11 @@ abstract class TaskStore {
 		$this->client = $client;
 	}
 
+    /**
+     * @param $taskID
+     * @param Task $task
+     * @return mixed
+     */
 	abstract public function setTask($taskID, Task $task);
 
 	/**
@@ -25,5 +30,15 @@ abstract class TaskStore {
 	 * @throws TaskNotFoundException
 	 */
 	abstract public function getTask($taskID);
+
+    /**
+     * @return mixed
+     */
+    abstract public function lock();
+
+    /**
+     * @return mixed
+     */
+    abstract public function unlock();
 }
 
